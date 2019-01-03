@@ -301,20 +301,18 @@ class Chosen extends AbstractChosen
   search_results_mouseout: (evt) ->
     this.result_clear_highlight() if $(evt.target).hasClass("active-result") or $(evt.target).parents('.active-result').first()
 
-  escapeHTML: (unsafe) => {
-      return unsafe.replace(/[&<"']/g, function(m) {
-        switch (m) {
-          case '&':
-            return '&amp;';
-          case '<':
-            return '&lt;';
-          case '"':
-            return '&quot;';
-          default:
-            return '&#039;';
-        }
-      });
-    };
+  escapeHTML: (unsafe) ->
+    return unsafe.replace(/[&<"']/g, (m) ->
+      switch (m)
+        case '&':
+          return '&amp;';
+        case '<':
+          return '&lt;';
+        case '"':
+          return '&quot;';
+        default:
+          return '&#039;';
+    );
 
   choice_build: (item) ->
     choice = $('<li />', { class: "search-choice" }).html("<span>#{this.escapeHTML(item)}</span>")
